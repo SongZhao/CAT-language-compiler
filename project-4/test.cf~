@@ -1,0 +1,151 @@
+//nested undeclared struct
+struct _s{
+    int x;
+     bool x;
+};
+
+struct _s ss;
+
+struct _s2{
+	int x;
+	int y;
+	struct _s1 sy;
+};
+
+struct _s2 first;
+
+struct _s1{
+	int x;
+	bool y;
+	struct _s sx;
+};
+
+bool test(){
+	first.x = 1;
+	first.sy.sx.y = false;
+	return true;
+}
+//bad type
+void s;
+
+//multiple declaration with same name
+int s1;
+
+
+//multiple type of function
+void fun(){}
+
+//multiple type parameter with same name
+void fun(void a, int a){
+}
+
+// function with uses of undeclared variables
+void undeclared() {
+a = x;
+	b++;
+	b--;
+//if-stmt with undeclared variable
+	if (a) {
+	a = b;
+	}
+//if-else stmt with undeclared variable
+  	if (a) 
+	{
+ 	 } 
+	else 
+	{
+  	  a = b;
+  	}
+//while-stmt with undeclared exp,
+ 	while (a=1) 
+	{
+    	a = 3;
+  	}
+}
+
+
+
+// function with uses of undeclared vars in all exprs 
+void expressions() {
+  int a;
+  a = y = z;
+  a = y + z;
+  a = y - z;
+  a = y * z;
+  a = y / z;
+  a = ! z;
+  a = y && z;
+  a = y || z;
+  a = y == z;
+  a = y != z;
+  a = y < z;
+  a = y > z;
+  a = y <= z;
+  a = y >= z;
+  a = -y;
+  y ++;
+  y --;
+}
+
+// function with nestedDeclaration
+void nestedDeclsAndUses() {
+  if (0) {
+    int x;
+    int y;
+    x = y;
+    if (1) {
+      int a;
+      int b;
+      b = a * 3 || 4;
+    } else {
+      int c;
+      int d;
+      while (1) {
+        int k;
+	int m;
+	m = n+y-a*b * 23;
+      }
+      n++;
+      n--;
+    }
+  }
+}
+
+
+// test that when scope is exited, outer names remain
+// test that recursive fn calls are OK
+void testNested() {
+	if (s) {
+		int xxx;
+		testNested();
+		if (true) {
+			int yyy;
+			zzz = www; //bad uses of zzz and www due to none declaration 
+    		} 
+    		else {
+        		int zzz;
+        		while (true){
+            			int www;
+	    			xxx = yyy + zzz * www; //no error here 
+        		}
+        		printf("%d", www); // bad use of www
+        		yyy = 0; // bad use of yyy 
+    		}
+    		scanf("%d", zzz); // bad use of zzz 
+  	}
+  	xxx = yyy + zzz + www; // bad uses of xxx yyy zzz www 
+}
+
+int fn (int n) 
+{
+    if (n>0) {
+      fn(n-1);
+    }
+}
+
+// test that formals are in inner scope 
+int g;
+void tstFormals(int g, int tstFormals) {
+  int g;  // multiply declared 
+}
+

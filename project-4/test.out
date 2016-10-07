@@ -1,0 +1,129 @@
+struct _s{
+    int x;
+    bool x;
+    int x;
+};
+
+struct _s ss;
+struct _s2{
+    int x;
+    int y;
+    struct _s1 sy;
+};
+
+struct _s2 first;
+struct _s1{
+    int x;
+    bool y;
+    struct _s sx;
+};
+
+bool test() {
+    first(_s2).x(int) = 1;
+    first(_s2).sy.sx.y = false;
+    return true;
+}
+
+void s;
+int s1;
+void fun() {
+}
+
+void fun(void a, int a) {
+}
+
+void undeclared() {
+    a = x;
+    b++;
+    b--;
+    if (a) {
+        a = b;
+    }
+    if (a) {
+    }
+    else {
+        a = b;
+    }
+    while ((a = 1)) {
+        a = 3;
+    }
+}
+
+void expressions(->void)() {
+    int a(int);
+    a(int) = (y = z);
+    a(int) = (y + z);
+    a(int) = (y - z);
+    a(int) = (y * z);
+    a(int) = (y / z);
+    a(int) = (!z);
+    a(int) = (y && z);
+    a(int) = (y || z);
+    a(int) = (y == z);
+    a(int) = (y != z);
+    a(int) = (y < z);
+    a(int) = (y > z);
+    a(int) = (y <= z);
+    a(int) = (y >= z);
+    a(int) = (-y);
+    y++;
+    y--;
+}
+
+void nestedDeclsAndUses(->void)() {
+    if (0) {
+        int x(int);
+        int y(int);
+        x(int) = y(int);
+        if (1) {
+            int a(int);
+            int b(int);
+            b(int) = ((a(int) * 3) || 4);
+        }
+        else {
+            int c(int);
+            int d(int);
+            while (1) {
+                int k(int);
+                int m(int);
+                m(int) = ((n + y(int)) - ((a * b) * 23));
+            }
+            n++;
+            n--;
+        }
+    }
+}
+
+void testNested(->void)() {
+    if (s) {
+        int xxx(int);
+        testNested(->void)();
+        if (true) {
+            int yyy;
+            zzz = www;
+        }
+        else {
+            int zzz(int);
+            while (true) {
+                int www(int);
+                xxx(int) = (yyy + (zzz(int) * www(int)));
+            }
+            printf("%d", www);
+            yyy = 0;
+        }
+        scanf("%d", zzz);
+    }
+    xxx = ((yyy + zzz) + www);
+}
+
+int fn(->int)(int n(int)) {
+    if ((n(int) > 0)) {
+        fn(->int)((n(int) - 1));
+    }
+}
+
+int g;
+void tstFormals(int g, int tstFormals) {
+    int g;
+}
+

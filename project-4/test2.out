@@ -1,0 +1,15 @@
+int a;
+int a;
+bool a;
+void b;
+struct Point{
+    int a;
+    bool a;
+    void a;
+};
+
+struct Line{
+    int a;
+    struct Point1 linePoint;
+};
+

@@ -1,0 +1,19 @@
+int a;
+int a; //mul decl
+
+bool a; //mul decl
+void b; //non - function void err
+
+struct Point{
+	int a;   //allowed
+	bool a;	 //mul decl
+	void a;	 //non-funtion void
+};
+
+struct Line{
+	int a;
+	struct Point1 linePoint; //invalid name of struct type
+};
+
+
+	

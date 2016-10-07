@@ -1,0 +1,171 @@
+bool bbb;
+struct S{
+    int a;
+};
+
+struct B{
+    int b;
+};
+
+struct S t;
+struct B p;
+void f(int p1, bool p2) {
+}
+
+int f1(int a) {
+}
+
+void main() {
+    int aaa;
+    aaa(int) = (f(int,bool->void) + f(int,bool->void));
+    bbb(bool) = (f(int,bool->void) == 3);
+    bbb(bool) = (f(int,bool->void) > main(->void));
+    bbb(bool) = (f(int,bool->void) == f(int,bool->void));
+    aaa(int)();
+    f(int,bool->void)();
+    f(int,bool->void)(5);
+    f(int,bool->void)(aaa(int), aaa(int));
+    f(int,bool->void)(t(S), t(S).a(int));
+    S(struct)();
+    t(S) = 5;
+    S(struct) = B(struct);
+    t(S) = t(S);
+    cin >> S(struct);
+    t(S) = (true || 3);
+    bbb(bool) = (S(struct) && t(S).a(int));
+    return (10 + true);
+    return 10;
+    return true;
+    aaa(int) = (aaa(int) + (!false));
+    aaa(int) = (aaa(int) + "string");
+    bbb(bool) = aaa(int);
+    bbb(bool) = ((aaa(int) + true) && (bbb(bool) < true));
+}
+
+int glbInt;
+bool glbBool;
+void coutTstFunc() {
+    return;
+}
+
+int intTstFunc1() {
+    return 1;
+}
+
+int intTstFunc2() {
+    return 2;
+}
+
+void main_tst_other(int intPara1, int intPara2, bool boolPara1, bool boolPara2) {
+    cout << coutTstFunc(->void);
+    cout << S(struct);
+    cout << t(S);
+    cout << coutTstFunc(->void)();
+    cout << (glbBool(bool) + 1);
+    cin >> coutTstFunc(->void);
+    cin >> S(struct);
+    cin >> t(S);
+    S(struct)();
+    coutTstFunc(->void)(intPara1(int), boolPara1(bool));
+    f(int,bool->void)(intPara1(int));
+    intPara1(int) = ((boolPara2(bool) + intPara1(int)) + boolPara2(bool));
+    intPara1(int) = (intPara2(int) - boolPara1(bool));
+    intPara1(int) = ((boolPara2(bool) * intPara1(int)) / boolPara2(bool));
+    boolPara1(bool) = (boolPara2(bool) * intPara1(int));
+    intPara1(int) = ((intPara1(int) + boolPara2(bool)) * (intPara1(int) * boolPara2(bool)));
+    intPara1(int) = (-(intPara2(int) / boolPara1(bool)));
+    boolPara1(bool)++;
+    boolPara2(bool)--;
+    intPara1(int) = ((-boolPara1(bool)) - ((intPara1(int) * boolPara2(bool)) / (-boolPara1(bool))));
+    boolPara1(bool) = (intPara1(int) > boolPara1(bool));
+    boolPara1(bool) = (boolPara1(bool) < boolPara1(bool));
+    boolPara1(bool) = (intPara1(int) >= boolPara1(bool));
+    boolPara1(bool) = (boolPara1(bool) <= boolPara1(bool));
+    boolPara1(bool) = (intPara1(int) || intPara2(int));
+    boolPara1(bool) = (intPara1(int) && intPara2(int));
+    boolPara1(bool) = (intPara1(int) || (intPara2(int) && intPara1(int)));
+    boolPara1(bool) = ((!intPara1(int)) || intPara2(int));
+    boolPara1(bool) = (!intPara1(int));
+    if (intPara1(int)) {
+        if ((intPara1(int) + intPara2(int))) {
+        }
+        else {
+        }
+    }
+    if (((intPara1(int) + ((intPara2(int) * intPara2(int)) / intPara1(int))) - intPara1(int))) {
+    }
+    while ((boolPara1(bool) + boolPara2(bool))) {
+        while (((intPara1(int) + ((intPara2(int) * intPara2(int)) / intPara1(int))) - intPara1(int))) {
+        }
+    }
+    boolPara1(bool) = (intPara1(int) == boolPara2(bool));
+    boolPara1(bool) = (intPara1(int) != boolPara2(bool));
+    boolPara1(bool) = (boolPara2(bool) == coutTstFunc(->void));
+    boolPara1(bool) = (intPara1(int) != coutTstFunc(->void));
+    boolPara1(bool) = (coutTstFunc(->void)() == coutTstFunc(->void)());
+    if ((coutTstFunc(->void)() != coutTstFunc(->void)())) {
+        boolPara1(bool) = (intTstFunc1(->int) == intTstFunc2(->int));
+        boolPara1(bool) = (intTstFunc1(->int)() == intTstFunc2(->int)());
+    }
+    while ((coutTstFunc(->void) == coutTstFunc(->void))) {
+    }
+    boolPara1(bool) = (coutTstFunc(->void) != coutTstFunc(->void));
+    if ((S(struct) == S(struct))) {
+        while ((S(struct) != S(struct))) {
+            while ((S(struct) >= S(struct))) {
+            }
+        }
+    }
+    boolPara1(bool) = ((t(S) == t(S)) || true);
+    boolPara2(bool) = (t(S) != t(S));
+    coutTstFunc(->void) = coutTstFunc(->void);
+    S(struct) = S(struct);
+    t(S) = t(S);
+    return;
+}
+
+void shitty_method(bool boolPara1) {
+    cout << (f(int,bool->void) + 1);
+    t(S).a(int) = ((true + 3) * 4);
+    bbb(bool) = (true && (false || 3));
+    f(int,bool->void)(("a" * 4), true);
+    f1(int->int)(("a" * 4));
+    t(S).a(int) = (1 + f(int,bool->void)());
+    if (((true + 3) == t(S).a(int))) {
+    }
+    t(S).a(int) = (true + "hello");
+    t(S).a(int) = (1 + f(int,bool->void)(true, 1));
+    t(S).a(int) = (1 + f(int,bool->void)(1));
+    t(S).a(int) = (1 + f1(int->int)(1, 2));
+    t(S).a(int) = (1 + f1(int->int)(1));
+    t(S).a(int) = (1 * f1(int->int)(1));
+    t(S).a(int) = (1 / f1(int->int)(1));
+    boolPara1(bool) = (1 > f1(int->int)(1));
+    boolPara1(bool) = (1 < f1(int->int)(1));
+    boolPara1(bool) = (1 >= f1(int->int)(1));
+    boolPara1(bool) = (1 <= f1(int->int)(1));
+    boolPara1(bool) = (1 == f1(int->int)(1));
+    boolPara1(bool) = (true || f1(int->int)(1));
+    return (3 + true);
+    return 2;
+    t(S).a(int) = "here";
+    bbb(bool) = "shit";
+    f(int,bool->void) = "what";
+    t(S).a(int) = (t(S).a(int) + "hahaha");
+    bbb(bool) = ((((t(S).a(int) == true) || true) && true) != true);
+    bbb(bool) = ((((t(S).a(int) && true) || true) && true) == true);
+}
+
+int func() {
+    return;
+}
+
+void funcVoid() {
+    return 0;
+}
+
+int funcInt() {
+    return true;
+    return;
+}
+

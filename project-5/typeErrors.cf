@@ -1,0 +1,219 @@
+bool bbb;
+struct S { int a; };
+struct B { int b; };
+struct S t;
+struct B p;
+
+void f(int p1, bool p2) {
+}
+int f1(int a)
+{
+}
+void main() {
+    int aaa;
+
+    // some errors involving illegal operations on functions
+    aaa = f + f;//Arithmetic operator applied to non-numeric operand
+    bbb = f == 3;//Type mismatch
+    bbb = f > main;//Relational operator applied to non-numeric operand
+    bbb = f == f;//Equality operator applied to void functions
+
+    // some errors involving bad function calls 
+    aaa();//Attempt to call a non-function
+    f();//Function call with wrong number of args
+    f(5);//Function call with wrong number of args
+    f(aaa, aaa);///Type of actual does not match type of formal
+    f(t, t.a);//Type of actual does not match type of formal
+    S();//Attempt to call a non-function
+
+    // some errors involving structs 
+    t = 5;//Type mismatch
+    S = B;//Struct name assignment
+    t = t;//Struct variable assignment
+    cin >> S;//Attempt to read a struct name
+    t = true || 3;//Logical operator applied to non-bool operand
+    bbb = S && t.a;//Logical operator applied to non-bool operand
+    
+    // error involving return
+    return 10 + true;//Arithmetic operator applied to non-numeric operand
+    return 10;//Return with a value in a void function
+    return true;//Return with a value in a void function
+
+    // other type errors 
+    aaa = aaa + (!false);//Arithmetic operator applied to non-numeric operand
+    aaa = aaa + "string";//Arithmetic operator applied to non-numeric operand
+    bbb = aaa;//bool and int && Type mismatch
+
+    // don't give too many or too few error messages here 
+    bbb = (aaa + true) && (bbb < true);// Arithmetic,Relational operator applied to non-numeric operand
+}	
+
+
+int glbInt;
+bool glbBool;
+
+void coutTstFunc(){
+	return;// no error
+}
+
+int intTstFunc1(){
+	return 1;
+}
+
+int intTstFunc2(){
+	return 2;
+}
+void main_tst_other(int intPara1, int intPara2, bool boolPara1, bool boolPara2){
+	//Attempt to write a function	
+cout << coutTstFunc;
+	//Attempt to write a struct name	
+cout << S;
+	//Attempt to write a struct variable	
+cout << t;
+	//Attempt to write void	
+cout << coutTstFunc();
+	//Arithmetic operator applied to non-numeric operand
+cout << glbBool + 1;
+	//Attempt to read a function	
+cin >> coutTstFunc;
+	//Attempt to read a struct name	
+cin >> S;
+	//Attempt to read a struct variable	
+cin >> t;
+	
+	//Attempt to call a non-function	
+S();
+	//Function call with wrong number of args	
+coutTstFunc(intPara1, boolPara1);
+	//Type of actual does not match type of formal	
+f(intPara1);
+	//Arithmetic operator applied to non-numeric operand	
+intPara1 = boolPara2 + intPara1 + boolPara2;
+intPara1 = intPara2 - boolPara1;
+intPara1 = boolPara2 * intPara1 / boolPara2;
+boolPara1 = boolPara2*intPara1;
+intPara1 = (intPara1 + boolPara2)*(intPara1*boolPara2);
+intPara1 = -intPara2 / boolPara1;
+boolPara1++;
+boolPara2--;
+intPara1 = -boolPara1 - intPara1* boolPara2 / -boolPara1;
+	//Relational operator applied to non-numeric operand	
+boolPara1 = intPara1 > boolPara1;
+boolPara1 = boolPara1 < boolPara1;
+boolPara1 = intPara1 >= boolPara1;
+boolPara1 = boolPara1 <= boolPara1;
+
+	//Logical operator applied to non-bool operand	
+boolPara1 = intPara1 || intPara2;
+boolPara1 = intPara1 && intPara2;
+boolPara1 = intPara1 || intPara2 && intPara1;
+boolPara1 = !intPara1 || intPara2;
+boolPara1 = !intPara1;
+
+	//Non-bool expression used as an if condition	
+    if(intPara1){
+    if(intPara1 + intPara2){
+    }
+    else {
+    }
+    }
+
+    if( intPara1+intPara2 * intPara2 /intPara1- intPara1){
+	}
+
+	//Non-bool expression used as a while condition	
+	while(boolPara1 + boolPara2){
+while(intPara1+intPara2 * intPara2 /intPara1- intPara1){
+		}
+	}
+
+	//Type mismatch	
+boolPara1 = intPara1 == boolPara2;
+boolPara1 =intPara1 != boolPara2;
+boolPara1 = boolPara2 == coutTstFunc;
+boolPara1 =intPara1 != coutTstFunc;	
+
+	//Equality operator applied to void functions	
+boolPara1 = coutTstFunc() == coutTstFunc();
+if(coutTstFunc() != coutTstFunc()) {
+boolPara1 = intTstFunc1 == intTstFunc2;
+boolPara1 = intTstFunc1() == intTstFunc2();
+}
+
+	
+	//Equality operator applied to functions	
+while(coutTstFunc == coutTstFunc) {}
+boolPara1 = coutTstFunc != coutTstFunc;
+	
+
+	//Equality operator applied to struct names	
+if(S == S){//Equality operator applied to struct names
+while(S != S)//Equality operator applied to struct names
+{
+while(S>=S){//Relational operator applied to non-numeric operand
+}
+}
+}
+
+	//Equality operator applied to struct variables	
+boolPara1 = (t == t)|| true;
+boolPara2 = t != t;
+	//Function assignment	
+coutTstFunc = coutTstFunc;
+
+	//Struct name assignment	
+S = S;
+	//Struct variable assignment	
+t = t;
+
+return;
+}
+//now test some shits
+void shitty_method( bool boolPara1){
+
+cout << f + 1 ;         // P + 1 is an error; the write is OK
+t.a = (true + 3) * 4;      // true + 3 is an error; the * is OK
+bbb = true && (false || 3);   // false || 3 is an error; the && is OK
+f("a" * 4, true);            // "a" * 4 is an error; the call is OK
+f1("a"*4);
+t.a =1 + f();               // p() is an error with wrong number of para; the + is OK
+if((true + 3) == t.a){}        // true + 3 is an error; the == is OK
+t.a = true + "hello";    // one error for each of the non-int operands of the +
+t.a = 1 + f(true, 1);       // one for the bad arg type and one for the 2nd operand of the +
+t.a =1 + f(1);       // one for the wrong number of args and one for the 2nd operand of the +
+t.a = 1 + f1(1, 2);
+t.a = 1 + f1(1);
+t.a = 1 * f1(1);
+t.a = 1 / f1(1);
+boolPara1 = 1 > f1(1);
+boolPara1 = 1 < f1(1);
+boolPara1 = 1 >= f1(1);
+boolPara1 = 1 <= f1(1);
+boolPara1 = 1 == f1(1);
+//t.a = f1(2) + f1(3);
+boolPara1 = true ||f1(1);
+return 3+true;    // in a void function: one error for the 2nd operand to +
+return 2;         // and one for returning a value
+t.a = "here";     //Type mismatch
+bbb = "shit";     //Type mismatch
+f = "what";       //Type mismatch
+t.a = t.a + "hahaha";    //Arithmetic operator applied to non-numeric operand
+bbb = ( ( (t.a == true) || true) && true) != true;    //Type mismatch
+bbb = ( ( (t.a && true) || true) && true) == true;    //Logical operator applied to non-bool operand
+}
+
+//Missing return value	
+int func(){
+	return;
+}
+//Return with a value in a void function	
+void funcVoid(){
+	return 0;
+}
+//Bad return value	
+int funcInt(){
+	return true;
+        return; 
+}
+
+

@@ -1,0 +1,71 @@
+//comment test
+
+//valdeclare and type test
+int a;
+int b;
+bool c;
+void d;
+
+
+struct aStructor{ int AnInt; bool ABoolean; void AVoid;}
+
+struct aStructor testStruct;
+//function declare
+bool testfuntion2(){
+	int a; 		//test stmt and exp
+	bool b;
+	void c;
+	a = 0;
+	a++;
+	a--;
+	cin >> b;
+	cout << a;
+	if(a == 0)
+	{
+		int x, y;		
+		a = 4+3*5-a;
+		x = a/2;
+		if(a <= x){ b = true;
+			   b = !b;
+			   bool z = false;
+			   z = b || z;
+			   z = b && z;
+			   if(z != true)
+			   {
+			   	a = -a;
+				z = a <= x;
+				z = a => x;
+				z = a > x;
+				z = a < x;
+				cout << "we r here";
+			    }
+			   }
+	}
+	x = 10;
+	while(x != 0)
+	{
+		x--;
+	}
+	return testfuntion4(x);
+		
+}
+
+bool testfuntion4(int x)
+{
+	if (x == 0)
+		{ return false;}
+}
+void testfuntion3(int a, int b)
+{
+		
+	testStruct.AnInt = 1;
+	testStruct.ABoolean = true;
+	return;
+}
+
+int testfuntion(int a, bool b, int c){int x; bool y; void c; x = a; x = a + c; x = a - c; testfuntion2();return x + a;}
+
+
+
+
+

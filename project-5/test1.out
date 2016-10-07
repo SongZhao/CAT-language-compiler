@@ -1,0 +1,2976 @@
+	.data
+	.align 2
+_glb_int:	.space 4
+	.data
+	.align 2
+_glb_bool:	.space 4
+	.text
+_test_fancy_function:
+	sw    $ra, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 16
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	addi  $t0, $t0, -1
+	sw    t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#Postdec--
+	sw    $t0, 0($fp)	#load lhs addr to T0
+	lw    $t0, -4($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	not   $t0, $t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, -4($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L0:	.asciiz "\nfancy function("
+	.text
+	la    $t0, .L0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L1:	.asciiz ", "
+	.text
+	la    $t0, .L1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, -4($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L2:	.asciiz ")"
+	.text
+	la    $t0, .L2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sgt   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L3
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, -4($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	jal   _test_fancy_function
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L3:
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	j     _test_fancy_function_Exit
+_test_fancy_function_Exit:
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $ra, -8($fp)
+	move  $t0, $fp
+	lw    $fp, -12($fp)
+	move  $sp, $t0
+	jr    $ra
+	.text
+_test_function2:
+	sw    $ra, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 8
+	.data
+.L4:	.asciiz "\ntest function 2"
+	.text
+	la    $t0, .L4
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	j     _test_function2_Exit
+_test_function2_Exit:
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $ra, 0($fp)
+	move  $t0, $fp
+	lw    $fp, -4($fp)
+	move  $sp, $t0
+	jr    $ra
+	.text
+_test_function1:
+	sw    $ra, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 8
+	.data
+.L5:	.asciiz "\ntest function 1"
+	.text
+	la    $t0, .L5
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	jal   _test_function2
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 10
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	j     _test_function1_Exit
+_test_function1_Exit:
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $ra, 0($fp)
+	move  $t0, $fp
+	lw    $fp, -4($fp)
+	move  $sp, $t0
+	jr    $ra
+	.text
+_test_para_function:
+	sw    $ra, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 32
+	.data
+.L6:	.asciiz "\ntest_para_function called"
+	.text
+	la    $t0, .L6
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L7:	.asciiz "int x: "
+	.text
+	la    $t0, .L7
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L8:	.asciiz "int y: "
+	.text
+	la    $t0, .L8
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, -4($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L9:	.asciiz "bool z: "
+	.text
+	la    $t0, .L9
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, -8($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L10:	.asciiz "bool a: "
+	.text
+	la    $t0, .L10
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, -12($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L11:	.asciiz "int b: "
+	.text
+	la    $t0, .L11
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, -16($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L12:	.asciiz "int c: "
+	.text
+	la    $t0, .L12
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, -20($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	j     _test_para_function_Exit
+_test_para_function_Exit:
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $ra, -24($fp)
+	move  $t0, $fp
+	lw    $fp, -28($fp)
+	move  $sp, $t0
+	jr    $ra
+	.text
+_void_function:
+	sw    $ra, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 8
+	.data
+.L13:	.asciiz "\nvoid function called"
+	.text
+	la    $t0, .L13
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+_void_function_Exit:
+	lw    $ra, 0($fp)
+	move  $t0, $fp
+	lw    $fp, -4($fp)
+	move  $sp, $t0
+	jr    $ra
+	.text
+_bool_function:
+	sw    $ra, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 12
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	j     _bool_function_Exit
+_bool_function_Exit:
+	lw    $v0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $ra, -4($fp)
+	move  $t0, $fp
+	lw    $fp, -8($fp)
+	move  $sp, $t0
+	jr    $ra
+	.text
+	.global main
+main:
+__start:
+	sw    $ra, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 8
+	sub   $sp, $sp, 24
+	.data
+.L14:	.asciiz "\n***main starts***"
+	.text
+	la    $t0, .L14
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L15:	.asciiz "\n\n***init value***"
+	.text
+	la    $t0, .L15
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L16:	.asciiz "\n0 glb_int:(0) "
+	.text
+	la    $t0, .L16
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, _glb_int		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L17:	.asciiz "\nlocal_int1: "
+	.text
+	la    $t0, .L17
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L18:	.asciiz "\nlocal_int2: "
+	.text
+	la    $t0, .L18
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L19:	.asciiz "\nlocal_int3: "
+	.text
+	la    $t0, .L19
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L20:	.asciiz "\nlocal_bool1: "
+	.text
+	la    $t0, .L20
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L21:	.asciiz "\nlocal_bool2: "
+	.text
+	la    $t0, .L21
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L22:	.asciiz "\nlocal_bool3: "
+	.text
+	la    $t0, .L22
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L23:	.asciiz "\n\n***test recursvie calls***"
+	.text
+	la    $t0, .L23
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	jal   _test_function1
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L24:	.asciiz "\ntest_function1 return:(10) "
+	.text
+	la    $t0, .L24
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, _glb_int		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L25:	.asciiz "\n\n***test assignments***\n***before assginments***"
+	.text
+	la    $t0, .L25
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L26:	.asciiz "\nlocal_int1: "
+	.text
+	la    $t0, .L26
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L27:	.asciiz "\nlocal_int2: "
+	.text
+	la    $t0, .L27
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L28:	.asciiz "\nlocal_int3: "
+	.text
+	la    $t0, .L28
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L29:	.asciiz "\nlocal_bool1: "
+	.text
+	la    $t0, .L29
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L30:	.asciiz "\nlocal_bool2: "
+	.text
+	la    $t0, .L30
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L31:	.asciiz "\nlocal_bool3: "
+	.text
+	la    $t0, .L31
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L32:	.asciiz "\n2 glb_int:(0) "
+	.text
+	la    $t0, .L32
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, _glb_int		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L33:	.asciiz "\n\n***after assginments***"
+	.text
+	la    $t0, .L33
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L34:	.asciiz "\nlocal_int1: "
+	.text
+	la    $t0, .L34
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L35:	.asciiz "\nlocal_int2: "
+	.text
+	la    $t0, .L35
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L36:	.asciiz "\nlocal_int3: "
+	.text
+	la    $t0, .L36
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L37:	.asciiz "\nlocal_bool1: "
+	.text
+	la    $t0, .L37
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L38:	.asciiz "\nlocal_bool2: "
+	.text
+	la    $t0, .L38
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L39:	.asciiz "\nlocal_bool3: "
+	.text
+	la    $t0, .L39
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L40:	.asciiz "\n2 glb_int:(2) "
+	.text
+	la    $t0, .L40
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, _glb_int		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L41:	.asciiz "\n\n***test expressions***"
+	.text
+	la    $t0, .L41
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L42:	.asciiz "\nlocal_int1: "
+	.text
+	la    $t0, .L42
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L43:	.asciiz "\nlocal_int2: "
+	.text
+	la    $t0, .L43
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L44:	.asciiz "\nlocal_int3: "
+	.text
+	la    $t0, .L44
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L45:	.asciiz "\nlocal_bool1: "
+	.text
+	la    $t0, .L45
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L46:	.asciiz "\nlocal_bool2: "
+	.text
+	la    $t0, .L46
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L47:	.asciiz "\nlocal_bool3: "
+	.text
+	la    $t0, .L47
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L48:	.asciiz "\n\n***test binary operations***"
+	.text
+	la    $t0, .L48
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_bool
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L49:	.asciiz "\nlocal_int1 + local_int2:(3)  "
+	.text
+	la    $t0, .L49
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L50:	.asciiz "\nlocal_int1 - local_int2:(-1)  "
+	.text
+	la    $t0, .L50
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sub   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L51:	.asciiz "\nlocal_int1 * local_int2:(2)  "
+	.text
+	la    $t0, .L51
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L52:	.asciiz "\nlocal_int1 / local_int2:(0)  "
+	.text
+	la    $t0, .L52
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	div   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L53:	.asciiz "\nlocal_int1++:(1) "
+	.text
+	la    $t0, .L53
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	addi  $t0, $t0, 1
+	sw    t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#PostInc--
+	sw    $t0, 0($fp)	#load lhs addr to T0
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L54:	.asciiz "\nlocal_int1--:(0) "
+	.text
+	la    $t0, .L54
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	addi  $t0, $t0, -1
+	sw    t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#Postdec--
+	sw    $t0, 0($fp)	#load lhs addr to T0
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L55:	.asciiz "\nlocal_int1+ -local_int1:(0) "
+	.text
+	la    $t0, .L55
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, -1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L56:	.asciiz "\n!local_bool1:(1) "
+	.text
+	la    $t0, .L56
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	not   $t0, $t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L57:	.asciiz "\n!local_bool1:(0) "
+	.text
+	la    $t0, .L57
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	not   $t0, $t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L58:	.asciiz "\n\n***test relation operations***"
+	.text
+	la    $t0, .L58
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_bool
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L59:	.asciiz "\nlocal_bool1 && local_bool2:(0) "
+	.text
+	la    $t0, .L59
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L60
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L61
+.L60:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L61:
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L62:	.asciiz "\nlocal_bool1 || local_bool2:(1) "
+	.text
+	la    $t0, .L62
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 1, .L63
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L64
+.L63:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L64:
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L65:	.asciiz "\nlocal_bool1 == local_bool2:(0) "
+	.text
+	la    $t0, .L65
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	seq   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L66:	.asciiz "\nlocal_bool1 != local_bool2:(1) "
+	.text
+	la    $t0, .L66
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sne   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L67:	.asciiz "\nlocal_int1 < local_int2:(1)  "
+	.text
+	la    $t0, .L67
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	slt   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L68:	.asciiz "\nlocal_int1 <= local_int2:(1)  "
+	.text
+	la    $t0, .L68
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sle   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L69:	.asciiz "\nlocal_int1 > local_int2:(0)  "
+	.text
+	la    $t0, .L69
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sgt   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L70:	.asciiz "\nlocal_int1 >= local_int2:(0)  "
+	.text
+	la    $t0, .L70
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sge   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L71:	.asciiz "\n\n***test control flow***"
+	.text
+	la    $t0, .L71
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L72:	.asciiz "\n***test if stmt***"
+	.text
+	la    $t0, .L72
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L73
+	.data
+.L74:	.asciiz "\n---if stmt goes here---"
+	.text
+	la    $t0, .L74
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+.L73:
+	.data
+.L75:	.asciiz "\nlocal_bool1:(1) "
+	.text
+	la    $t0, .L75
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L76:	.asciiz "\n\n***test if-else stmt(true path)***"
+	.text
+	la    $t0, .L76
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+.L78:
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L77
+	.data
+.L79:	.asciiz "\n---if-else stmt, correct path---"
+	.text
+	la    $t0, .L79
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	b     .L78
+.L77:
+	.data
+.L80:	.asciiz "\n---if-else stmt, wrong path---"
+	.text
+	la    $t0, .L80
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+.L78:
+	.data
+.L81:	.asciiz "\nlocal_int1:(1) "
+	.text
+	la    $t0, .L81
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L82:	.asciiz "\n\n***test if-else stmt(false path)***"
+	.text
+	la    $t0, .L82
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+.L84:
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L83
+	.data
+.L85:	.asciiz "\n---if-else stmt, wrong path---"
+	.text
+	la    $t0, .L85
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	b     .L84
+.L83:
+	.data
+.L86:	.asciiz "\n----if-else stmt, correct path---"
+	.text
+	la    $t0, .L86
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+.L84:
+	.data
+.L87:	.asciiz "\nlocal_int1:(2) "
+	.text
+	la    $t0, .L87
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L88:	.asciiz "\n\n***test while stmt (5 iterations)***"
+	.text
+	la    $t0, .L88
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 5
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+.L89:
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sne   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L90
+	.data
+.L91:	.asciiz "\nlocal_int1: "
+	.text
+	la    $t0, .L91
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sub   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	b     .L89
+.L90:
+	.data
+.L92:	.asciiz "\nlocal_int1:(0) "
+	.text
+	la    $t0, .L92
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L93:	.asciiz "\n\nLet us test something fucking complex :)****"
+	.text
+	la    $t0, .L93
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L94:	.asciiz "\n***test complex operations***"
+	.text
+	la    $t0, .L94
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	.data
+.L95:	.asciiz "\n***reset varibales***"
+	.text
+	la    $t0, .L95
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_bool
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L96:	.asciiz "\nglb_int = local_int1 + local_int2 * local_int3 - local_int1 /local_int1:(6) "
+	.text
+	la    $t0, .L96
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	div   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sub   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L97:	.asciiz "\nglb_bool = local_bool1 || local_bool2 && local_bool3 && (local_int1 < local_int2): (1) "
+	.text
+	la    $t0, .L97
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 1, .L98
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L100
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L101
+.L100:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L101:
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L102
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	slt   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L103
+.L102:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L103:
+	b     .L99
+.L98:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L99:
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_bool
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L104:	.asciiz "\n1+2+3+4+5+6+7+8+9+10:(55) "
+	.text
+	la    $t0, .L104
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 4
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 5
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 6
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 7
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 8
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 9
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 10
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L105:	.asciiz "\nlocal_int1*1/1*2/2*3/3*4/4*5/5:(1) "
+	.text
+	la    $t0, .L105
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	div   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	div   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	div   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 4
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 4
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	div   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 5
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	mul   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 5
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	div   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L106:	.asciiz "\n\n***test chained assignments***"
+	.text
+	la    $t0, .L106
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 9
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L107:	.asciiz "\nglb_int:(9) "
+	.text
+	la    $t0, .L107
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, _glb_int		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L108:	.asciiz "\nlocal_int1:(9) "
+	.text
+	la    $t0, .L108
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L109:	.asciiz "\nlocal_int2:(9) "
+	.text
+	la    $t0, .L109
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L110:	.asciiz "\nlocal_int3:(9) "
+	.text
+	la    $t0, .L110
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L111:	.asciiz "\n\n***fancy recursive function calls***"
+	.text
+	la    $t0, .L111
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 10
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	jal   _test_fancy_function
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	.data
+.L112:	.asciiz "\n\n***test recursive if else***"
+	.text
+	la    $t0, .L112
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_bool
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+.L114:
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	slt   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 1, .L115
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sgt   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L116
+.L115:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L116:
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L113
+	.data
+.L117:	.asciiz "\n---correct path---"
+	.text
+	la    $t0, .L117
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	addi  $t0, $t0, 1
+	sw    t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#PostInc--
+	sw    $t0, 0($fp)	#load lhs addr to T0
+.L119:
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L120
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L121
+.L120:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L121:
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L122
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L123
+.L122:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L123:
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 1, .L124
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	not   $t0, $t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	b     .L125
+.L124:
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+.L125:
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L118
+	.data
+.L126:	.asciiz "\n---wrong path---"
+	.text
+	la    $t0, .L126
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	b     .L119
+.L118:
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	addi  $t0, $t0, 1
+	sw    t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#PostInc--
+	sw    $t0, 0($fp)	#load lhs addr to T0
+	li    $t0, 5
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	.data
+.L127:	.asciiz "\n---correct path---"
+	.text
+	la    $t0, .L127
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+.L128:
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sub   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	sne   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L129
+.L130:
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 5
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	slt   $t0, $t0, $t1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L131
+	.data
+.L132:	.asciiz "\n inner while: "
+	.text
+	la    $t0, .L132
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	b     .L130
+.L131:
+	.data
+.L133:	.asciiz "\n outer while: "
+	.text
+	la    $t0, .L133
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	b     .L128
+.L129:
+.L119:
+	b     .L114
+.L113:
+	.data
+.L134:	.asciiz "\n---wrong path---"
+	.text
+	la    $t0, .L134
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+.L114:
+	.data
+.L135:	.asciiz "\n\n***test multi-parameters functions***\n"
+	.text
+	la    $t0, .L135
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 2
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 3
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, 0($fp)
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#peek
+	sw    $t0, _glb_int
+	lw    $t0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 0($fp)	#load local var
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, _glb_int		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	jal   _test_para_function
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	.data
+.L136:	.asciiz "\n***test void return funtion call***"
+	.text
+	la    $t0, .L136
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	jal   _void_function
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	.data
+.L137:	.asciiz "\n***test bool return funtion call***\n"
+	.text
+	la    $t0, .L137
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 1
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	jal   _bool_function
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L138:	.asciiz "\n"
+	.text
+	la    $t0, .L138
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $t0, 0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	jal   _bool_function
+	sw    $v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L139:	.asciiz "\n\n***test read int stmt***"
+	.text
+	la    $t0, .L139
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $v0, 5
+	syscall
+	sw    v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#read--
+	sw    $t0, _glb_int
+	.data
+.L140:	.asciiz "\n1 glb_int: "
+	.text
+	la    $t0, .L140
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, _glb_int		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L141:	.asciiz "\n\n***test read bool stmt***"
+	.text
+	la    $t0, .L141
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	li    $v0, 5
+	syscall
+	sw    v0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	#read--
+	sw    $t0, _glb_bool
+	.data
+.L142:	.asciiz "\nglb_bool: "
+	.text
+	la    $t0, .L142
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	lw    $t0, _glb_bool		#load Gvar to t0
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+	.data
+.L143:	.asciiz "\n"
+	.text
+	la    $t0, .L143
+	sw    $t0, 0($sp)	#PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	#POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+_main_Exit:
+	lw    $ra, 0($fp)
+	move  $t0, $fp
+	lw    $fp, -4($fp)
+	move  $sp, $t0
+	li    $v0, 10
+	syscall
