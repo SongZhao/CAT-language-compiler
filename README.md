@@ -45,8 +45,8 @@ If you are not sure which token name matches which token, ask!
 Comments
 
 Text starting with a double slash (//) or a sharp sign (#) up to the end of the line is a comment (except of course if those characters are inside a string literal). For example:
-// this is a comment
-# and so is this
+// this is a comment        # and so is this
+
 The scanner should recognize and ignore comments (but there is no COMMENT token).
 
 Whitespace
