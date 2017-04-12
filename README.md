@@ -42,16 +42,14 @@ Note that code telling JLex to return the special EOF token on end-of-file has a
 
 If you are not sure which token name matches which token, ask!
 
-Comments
+#Comments
 
 Text starting with a double slash (//) or a sharp sign (#) up to the end of the line is a comment (except of course if those characters are inside a string literal). For example:
 // this is a comment        # and so is this
 
 The scanner should recognize and ignore comments (but there is no COMMENT token).
 
-Whitespace
-
-Spaces, tabs, and newline characters are whitespace. Whitespace separates tokens and changes the character counter, but should otherwise be ignored (except inside a string literal).
+Whitespace，Spaces, tabs, and newline characters are whitespace. Whitespace separates tokens and changes the character counter, but should otherwise be ignored (except inside a string literal).
 Illegal Characters
 
 Any character that is not whitespace and is not part of a token or comment is illegal.
